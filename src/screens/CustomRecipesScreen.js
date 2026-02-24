@@ -21,12 +21,12 @@ import {
   
     const route = useRoute();
     const { recipe } = route.params || {}; // Pass the  object as a parameter
-    console.log('recipe',recipe);
+    //console.log('recipe',recipe);
     
     const favoriteRecipe = useSelector(
       (state) => state.favorites.favoriterecipes
     );
-    console.log('favoriteRecipe from custom',favoriteRecipe);
+   // console.log('favoriteRecipe from custom',favoriteRecipe);
     
     const isFavourite = favoriteRecipe.includes(recipe.idCategory); // Adjust this according to your recipe structure
   
@@ -41,45 +41,96 @@ import {
     const handleToggleFavorite = () => {
       dispatch(toggleFavorite(recipe)); // Adjust the action to handle recipe
     };
-  
+
+   
     return (
       <ScrollView
-        style={styles.container}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent} testID="scrollContent"
-      >
-        {/* Recipe Image */}
-        <View style={styles.imageContainer} testID="imageContainer">
-        {recipe.image && (
-            <Image source={{ uri: recipe.image }} style={styles.recipeImage} />
-          )}
-        </View>
-        <View
-          style={styles.topButtonsContainer} testID="topButtonsContainer"
-        >
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={styles.backButton}
-          >
-            <Text>Back</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleToggleFavorite}
-            style={styles.favoriteButton}
-          >
-            <Text>{isFavourite ? "♥" : "♡"}</Text>
-          </TouchableOpacity>
-        </View>
-  
-        {/* Recipe Details */}
-        <View style={styles.contentContainer} testID="contentContainer">
-        <Text style={styles.recipeTitle}>{recipe.title}</Text>
-  <View style={styles.sectionContainer}>
-    <Text style={styles.sectionTitle}>Content</Text>
-    <Text style={styles.contentText}>{recipe.description}</Text>
-  </View>
-        </View>
-      </ScrollView>
+           style={styles.container}
+           showsVerticalScrollIndicator={false}
+           contentContainerStyle={styles.scrollContent}
+         >
+           {/* recipe Image */}
+           
+     
+           <View style={styles.imageContainer} testID="imageContainer">
+            <Image
+                           source={{ uri: recipe.recipeImage }}
+                           style={styles.recipeImage}
+                         />
+           </View>
+     
+           {/* Back Button and Favorite Button */}
+           <View style={styles.topButtonsContainer}>
+             <TouchableOpacity
+               onPress={() => navigation.goBack()}
+               style={styles.backButton}
+             >
+               <Text>Back</Text>
+             </TouchableOpacity>             
+           </View>
+     
+           {/* recipe Description */}
+       
+             <View style={styles.contentContainer}>
+               {/* Title and Category */}
+               <View
+                 style={styles.recipeDetailsContainer}
+                 testID="recipeDetailsContainer"
+               >
+                 <Text style={styles.recipeTitle} testID="recipeTitle">
+                   {recipe.recipeName}              
+                 </Text>
+                 <Text style={styles.recipeCategory} testID="recipeCategory">
+                   {recipe.category}
+                 </Text>
+               </View>
+               <View style={styles.miscContainer} testID="miscContainer">
+                     <View style={styles.miscItem}>
+                     <Text style={styles.miscIcon}>🕒</Text>
+                     <Text style={styles.miscText}>35 Mins</Text>
+                   </View>
+                   <View style={styles.miscItem}>
+                     <Text style={styles.miscIcon}>👥</Text>
+                     <Text style={styles.miscText}>03 Servings</Text>
+                   </View>
+                   <View style={styles.miscItem}>
+                     <Text style={styles.miscIcon}>🔥</Text>
+                     <Text style={styles.miscText}>103 Cal</Text>
+                   </View>
+                   <View style={styles.miscItem}>
+                     <Text style={styles.miscIcon}>🎚️</Text>
+                     <Text style={styles.miscText}>Medium</Text>
+                   </View>
+           </View>
+     
+           {/* Ingredients */}
+           <View style={styles.sectionContainer}>
+          
+           </View>
+     
+           {/* Instructions */}
+           <View style={styles.sectionContainer} testID="sectionContainer">
+             <Text style={styles.sectionTitle}>Ingredients</Text>
+               <View style={styles.ingredientsList} testID="ingredientsList">
+                 {(recipe.recipe).map((i) => (
+                   <View key={i} style={styles.ingredientItem}>
+                     <View style={styles.ingredientBullet} />
+                     <Text style={styles.ingredientText}>
+                       {/* {meal["strMeasure" + i]} {meal["strIngredient" + i]} */}
+                       {i.ingredientName} {i.measure}
+                     </Text>
+                   </View>
+                 ))}
+               </View>
+     
+               <Text style={styles.sectionTitle}>Instructions</Text>
+               <Text style={styles.instructionsText}>{recipe.recipeInstructions}</Text>
+     
+             </View>
+               {/* Description */}
+               
+             </View>
+         </ScrollView>
     );
   }
   
@@ -146,5 +197,50 @@ import {
       fontSize: hp(1.6),
       color: "#4B5563",
     },
+      miscContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 20,
+    paddingHorizontal: wp(4),
+  },
+    miscItem: {
+    alignItems: "center",
+    backgroundColor: "#F5F5F5",
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 10,
+    elevation: 3,
+  },
+  ingredientsList: {
+    marginLeft: wp(4),
+  },
+  ingredientItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: hp(1),
+    padding: 10,
+    backgroundColor: "#FFF9E1",
+    borderRadius: 8,
+    elevation: 2,
+  },
+  ingredientBullet: {
+    backgroundColor: "#FFD700",
+    borderRadius: 50,
+    height: hp(1.5),
+    width: hp(1.5),
+    marginRight: wp(2),
+  },
+  ingredientText: {
+    fontSize: hp(1.9),
+    color: "#333",
+    fontFamily: "Lato",
+  },
+  instructionsText: {
+    fontSize: hp(2),
+    color: "#444",
+    lineHeight: hp(3),
+    textAlign: "justify",
+    fontFamily: "Lato",
+  },
   });
   

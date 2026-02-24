@@ -12,7 +12,7 @@ import FoodItems from "../components/recipes";
 export default function HomeScreen() {
   const [activeCategory, setActiveCategory] = useState("Chicken");
 
-  // Hardcoded categories for news
+  // Hardcoded categories for recipes
   const [categories, setCategories] = useState([
     {
       idCategory: "1",
@@ -672,9 +672,63 @@ export default function HomeScreen() {
       idFood:'14',
       recipeInstructions:"To make Chicken and Rice, heat 2 tablespoons of oil in a large skillet over medium heat, then season 4 bone-in, skin-on chicken thighs with salt and pepper and brown them on both sides for about 5-7 minutes. Remove the chicken and set aside. In the same skillet, add 1 chopped onion and 2 minced garlic cloves, sautéing until the onion is translucent. Stir in 1 cup of long-grain rice, allowing it to toast for 1-2 minutes. Add 2 cups of chicken broth, 1 teaspoon of paprika, and the browned chicken thighs back to the skillet. Bring to a simmer, cover, and reduce the heat to low, cooking for 20-25 minutes or until the rice is tender and the chicken is cooked through. Fluff the rice with a fork, garnish with chopped parsley, and serve hot.",
       category:'Chicken',
-      recipeName: "Chicken and Rice",
-      recipeImage: "https://images.unsplash.com/photo-1617651523904-8768096faf40?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      recipeName: "Chicken and Sninach Pasta",
+      recipeImage: "https://www.tasteofhome.com/wp-content/uploads/2018/01/exps42564_THHC1442845D57B.jpg?fit=750%2C750",
       recipeId: "chicken_08",
+      recipeCategory: "Chicken",
+      recipeOrigin: "American",
+      cookingDescription: "Cook chicken with rice and seasonings in a single pot.",
+      recipeTags: "Comfort Food,One-Pot",
+      ingredients: [
+        {
+          ingredientName: "Chicken",
+          measure: "500g"
+        },
+        {
+          ingredientName: "Rice",
+          measure: "1 cup"
+        },
+        {
+          ingredientName: "Chicken Broth",
+          measure: "2 cups"
+        }
+      ],
+    },
+      {
+      idCategory: "2",
+      idFood:'15',
+      recipeInstructions:"To make Chicken and Rice, heat 2 tablespoons of oil in a large skillet over medium heat, then season 4 bone-in, skin-on chicken thighs with salt and pepper and brown them on both sides for about 5-7 minutes. Remove the chicken and set aside. In the same skillet, add 1 chopped onion and 2 minced garlic cloves, sautéing until the onion is translucent. Stir in 1 cup of long-grain rice, allowing it to toast for 1-2 minutes. Add 2 cups of chicken broth, 1 teaspoon of paprika, and the browned chicken thighs back to the skillet. Bring to a simmer, cover, and reduce the heat to low, cooking for 20-25 minutes or until the rice is tender and the chicken is cooked through. Fluff the rice with a fork, garnish with chopped parsley, and serve hot.",
+      category:'Chicken',
+      recipeName: "One Pan Chicken and Potatoes",
+      recipeImage: "https://letthebakingbegin.com/wp-content/uploads/2014/05/IMG_9792.jpg",
+      recipeId: "chicken_09",
+      recipeCategory: "Chicken",
+      recipeOrigin: "American",
+      cookingDescription: "Cook chicken with rice and seasonings in a single pot.",
+      recipeTags: "Comfort Food,One-Pot",
+      ingredients: [
+        {
+          ingredientName: "Chicken",
+          measure: "500g"
+        },
+        {
+          ingredientName: "Rice",
+          measure: "1 cup"
+        },
+        {
+          ingredientName: "Chicken Broth",
+          measure: "2 cups"
+        }
+      ],
+    },
+      {
+      idCategory: "2",
+      idFood:'16',
+      recipeInstructions:"To make Chicken and Rice, heat 2 tablespoons of oil in a large skillet over medium heat, then season 4 bone-in, skin-on chicken thighs with salt and pepper and brown them on both sides for about 5-7 minutes. Remove the chicken and set aside. In the same skillet, add 1 chopped onion and 2 minced garlic cloves, sautéing until the onion is translucent. Stir in 1 cup of long-grain rice, allowing it to toast for 1-2 minutes. Add 2 cups of chicken broth, 1 teaspoon of paprika, and the browned chicken thighs back to the skillet. Bring to a simmer, cover, and reduce the heat to low, cooking for 20-25 minutes or until the rice is tender and the chicken is cooked through. Fluff the rice with a fork, garnish with chopped parsley, and serve hot.",
+      category:'Chicken',
+      recipeName: "Chicken Shawarma with Potatoes",
+      recipeImage: "https://www.eatingwell.com/thmb/6MsrFEWQzMn_wDdhVMqsrP6Zozo=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/7804777-cef40de3903b47c5b4bbe65df65fbde5.jpg",
+      recipeId: "chicken_10",
       recipeCategory: "Chicken",
       recipeOrigin: "American",
       cookingDescription: "Cook chicken with rice and seasonings in a single pot.",
@@ -729,11 +783,18 @@ export default function HomeScreen() {
         </View>
 
         <View testID="categoryList">
-       
+            <Categories
+              categories={categories}
+              activeCategory={activeCategory}
+              handleChangeCategory={handleChangeCategory}
+            />
         </View>
 
         <View testID="foodList">
-
+          <FoodItems
+              categories={categories}
+              foods={filteredfoods}      
+            />
           </View>
       </ScrollView>
     </View>
