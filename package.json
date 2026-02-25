@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "deploy": "npm build && gh-pages -d dist -b master"
   },
   "dependencies": {
     "@expo/metro-runtime": "^3.2.3",
