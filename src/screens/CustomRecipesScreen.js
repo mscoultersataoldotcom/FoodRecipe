@@ -49,8 +49,7 @@ import {
            showsVerticalScrollIndicator={false}
            contentContainerStyle={styles.scrollContent}
          >
-           {/* recipe Image */}
-           
+           {/* recipe Image */}           
      
            <View style={styles.imageContainer} testID="imageContainer">
             <Image
